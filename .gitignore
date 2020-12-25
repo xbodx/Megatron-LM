@@ -4,3 +4,11 @@ __pycache__
 build/
 dist/
 *.egg-info/
+
+# Environments
+.nlp_pretrain_env
+.python-version
+
+# IDE
+.vscode/
+.idea/
