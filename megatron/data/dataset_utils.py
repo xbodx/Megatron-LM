@@ -477,6 +477,8 @@ def get_train_valid_test_split_(splits_string, size):
     """ Get dataset splits from comma or '/' separated string list."""
 
     splits = []
+    if splits_string.find('(') != -1:
+        splits_string = splits_string.replace('(', '').replace(')', '')
     if splits_string.find(',') != -1:
         splits = [float(s) for s in splits_string.split(',')]
     elif splits_string.find('/') != -1:

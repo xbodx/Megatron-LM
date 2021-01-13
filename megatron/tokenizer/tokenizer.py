@@ -195,7 +195,8 @@ class _GPT2BPETokenizer(AbstractTokenizer):
 
         self.tokenizer = GPT2Tokenizer(vocab_file, merge_file, errors='replace',
                                        special_tokens=[], max_len=None)
-        self.eod_id = self.tokenizer.encoder['<|endoftext|>']
+        if self.tokenizer.encoder.get('<|endoftext|>'):
+            self.eod_id = self.tokenizer.encoder['<|endoftext|>']
 
     @property
     def vocab_size(self):

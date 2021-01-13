@@ -20,6 +20,8 @@ import time
 
 import numpy as np
 import torch
+from pybind11.setup_helpers import Pybind11Extension
+from setuptools import setup
 
 from megatron import mpu, print_rank_0
 from megatron.data.dataset_utils import get_train_valid_test_split_
@@ -178,9 +180,10 @@ def _build_index_mappings(name, data_prefix, documents, sizes,
             start_time = time.time()
             # Use C++ implementation for speed.
             # First compile and then import.
-            from megatron.data.dataset_utils import compile_helper
-            compile_helper()
-            from megatron.data import helpers
+            ## from megatron.data.dataset_utils import compile_helper
+            ## compile_helper()
+            ## from megatron.data import helpers
+            import megatron_lm_helpers as helpers
             assert doc_idx.dtype == np.int32
             assert sizes.dtype == np.int32
             sample_idx = helpers.build_sample_idx(sizes, doc_idx, seq_length,
